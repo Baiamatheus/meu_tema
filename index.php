@@ -19,9 +19,10 @@
   </div>
 </div>  
 <div class="menu-barra">
-  <a href="#">Playlists</a>
-  <a href="#">Artistas</a>
-  <a href="#">Favoritas</a>
+  <a href="#" class="menu-link" data-secao="playlists">Playlists</a>
+  <a href="#" class="menu-link" data-secao="artistas">Artistas</a>
+  <a href="#" class="menu-link" data-secao="favoritas">Favoritas</a>
 </div>
 
+<div id="conteudo-dinamico"></div>
 <?php get_footer(); ?>

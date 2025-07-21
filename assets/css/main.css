@@ -4,6 +4,16 @@
     padding: 0;
     box-sizing: border-box;
   }
+  @font-face {
+    font-family: 'MinhaFonte';
+    src: url('../font/MinhaFonte.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: 'MinhaFonte', sans-serif;
+  }
   
   body {
     font-family: Arial, sans-serif;
@@ -181,5 +191,58 @@
   .menu-barra a:hover {
     background-color: #00cfff;
     color: #000;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: #fff;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin-top: 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #fff;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .menu-barra {
+    margin-top: 4rem;
+    text-align: center;
+  }
+  
+  .menu-barra a {
+    margin: 0 1rem;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    transition: background 0.3s ease;
+  }
+  
+  .menu-barra a:hover {
+    background: rgba(255,255,255,0.3);
   }
   
