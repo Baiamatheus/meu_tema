@@ -1,5 +1,8 @@
-<?php get_header(); ?>
-
+<?php 
+/*
+Template Name: Playlists
+*/
+get_header(); ?>
 <div class="header-top">
   <div class="menu-icon"></div>
   <nav class="menu-barra">

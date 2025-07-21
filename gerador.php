@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php 
+/*
+Template Name: Gerador
+*/
+get_header(); ?>
 
 <div class="header-top">
   <div class="menu-icon"></div>
