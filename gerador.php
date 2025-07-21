@@ -1,9 +1,14 @@
 <?php get_header(); ?>
 
-<div class="caminho">
-  MENU
+<div class="header-top">
+  <div class="menu-icon"></div>
+  <nav class="menu-barra">
+    <a href="index.php">Início</a>
+    <a href="playlists.php">Playlists</a>
+    <a href="sobre.php">Sobre</a>
+  </nav>
+  <div class="right-icon"></div>
 </div>
-
 <div class="container">
   <div class="esquerdo">
     <h1>GERAR NOVA PLAYLIST</h1>
@@ -44,10 +49,5 @@
   </div>
 </div>
 
-<div class="menu-barra">
-  <a href="#">Playlists</a>
-  <a href="#">Artistas</a>
-  <a href="#">Favoritas</a>
-</div>
 
 <?php get_footer(); ?>
