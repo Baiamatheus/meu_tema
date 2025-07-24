@@ -39,21 +39,21 @@ get_header();
                 <div class="carousel-item active">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/capa-musica.png" class="d-block w-100" alt="kojima">
                     <div class="carousel-texto">
-                        Novo álbum do EcoAventureiros está revolucionando o cenário da música sustentável.
+                        Kojima é gênio demais, não tem jeito.
                     </div>
                 </div>
 
                 <div class="carousel-item">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ozzy.png" class="d-block w-100" alt="Ozzy Osbourne">
                     <div class="carousel-texto">
-                        Ozzy Osbourne retorna aos palcos com energia renovada e novo repertório.
+                        Após falecimento de Ozzy Osbourne, Kojima relembra de momentos juntos.
                     </div>
                 </div>
 
                 <div class="carousel-item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/playlist3.jpg" class="d-block w-100" alt="Playlist">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/funk.png" class="d-block w-100" alt="Playlist">
                     <div class="carousel-texto">
-                        Playlist especial traz os maiores hits do funk carioca em 2025.
+                        Olha que apareceu no show da Mc Pipokinha.
                     </div>
                 </div>
             </div>

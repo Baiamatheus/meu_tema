@@ -30,18 +30,17 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link <?php if (is_front_page()) echo 'active'; ?>" href="<?php echo home_url('/'); ?>">Início</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($_SERVER['REQUEST_URI'] === '/playlists') echo 'active'; ?>" href="<?php echo home_url('/playlists'); ?>">Playlists</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($_SERVER['REQUEST_URI'] === '/sobre') echo 'active'; ?>" href="<?php echo home_url('/sobre'); ?>">Sobre</a>
-          </li>
-        </ul>
-
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link <?php if (is_front_page()) echo 'active'; ?>" href="/">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if (is_page('playlists')) echo 'active'; ?>" href="/playlists">Playlists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if (is_page('sobre')) echo 'active'; ?>" href="/sobre">Sobre</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
