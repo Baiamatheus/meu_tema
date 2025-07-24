@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 
-/* ===========================
-   Reset e base
-=========================== */
 * {
   margin: 0;
   padding: 0;
@@ -15,9 +12,7 @@ body {
   color: #fff;
 }
 
-/* ===========================
-   Navbar
-=========================== */
+/* Navbar*/
 .navbar {
   background: #111;
 }
@@ -28,7 +23,6 @@ body {
   text-transform: uppercase;
 }
 
-/* Estilo para os itens do menu */
 #navbarNav .navbar-nav .nav-link {
   color: white;
   padding: 10px 20px;
@@ -40,26 +34,18 @@ body {
   margin-left: 2px;
 }
 
-/* Item ativo com fundo amarelo */
 .navbar-nav .nav-link:not(.active):hover {
   background-color: #FFC107;
 }
-
-
 .navbar-toggler {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-
-
-
-/* Estilo do botão toggler para fundo amarelo */
 .custom-toggler {
   background-color: #FFD700; 
   border: none; 
 }
 
-/* Ícone do toggler com listras brancas */
 .custom-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath stroke='white' stroke-width='1.5' d='M2 4h12M2 8h12M2 12h12'/%3E%3C/svg%3E");
 }
@@ -80,10 +66,6 @@ body {
   }
 }
 
-/* ===========================
-   Home / Esquerdo (Olá, nós somos...)
-=========================== */
-
 /* Container esquerdo */
 .esquerdo {
   display: flex;
@@ -99,7 +81,6 @@ body {
   margin: 3rem auto; /* centraliza horizontalmente e margem vertical */
 }
 
-/* h3 da esquerda */
 .esquerdo h3 {
   font-weight: 400;
   font-size: 1.5rem;
@@ -110,7 +91,6 @@ body {
   text-shadow: 0 0 6px #007fffaa;
 }
 
-/* h1 da esquerda */
 .esquerdo h1 {
   font-size: 3.5rem;
   font-weight: 700;
@@ -122,7 +102,6 @@ body {
   text-shadow: 0 0 8px #ffd700bb;
 }
 
-/* Último h3 da esquerda */
 .esquerdo h3:last-of-type {
   font-weight: 600;
   font-size: 1.6rem;
@@ -132,7 +111,6 @@ body {
   text-shadow: 0 0 7px #ffd700cc;
 }
 
-/* Texto com efeito de digitação */
 .multiple-text {
   color: #ffd700;
   border-right: 2px solid #ffd700;
@@ -141,15 +119,11 @@ body {
   font-weight: 700;
 }
 
-/* Cursor piscando */
 @keyframes blinkCursor {
   0%, 100% { border-color: #ffd700; }
   50% { border-color: transparent; }
 }
 
-/* ===========================
-   Container direito (FIQUE POR DENTRO)
-=========================== */
 .container {
   display: flex;
   justify-content: space-between;
@@ -166,7 +140,6 @@ body {
   gap: 2rem;
 }
 
-/* Bloco direito */
 .direito {
   flex: 1;
   display: flex;
@@ -186,7 +159,6 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Botão */
 .btn {
   background-color: transparent;
   color: white;
@@ -206,9 +178,7 @@ body {
   color: black;
 }
 
-/* ===========================
-   Carrossel de notícias
-=========================== */
+/* Carrossel */
 .titulo-noticias {
   font-family: 'Orbitron', sans-serif;
   font-size: 2rem;
@@ -247,9 +217,7 @@ body {
   font-weight: 600;
 }
 
-/* ===========================
-   Seção Sobre (Quem Somos)
-=========================== */
+/* Seção Sobre Nós */
 .container.my-5 {
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -274,25 +242,6 @@ body {
   border-radius: 0;
 }
 
-/* ===========================
-   Outros estilos gerais
-=========================== */
-.capa {
-  width: 300px;
-  height: 300px;
-  border-radius: 10px;
-  object-fit: cover;
-}
-
-.musica {
-  width: 300px;
-  height: 300px;
-  border-radius: 10px;
-  object-fit: cover;
-  margin-top: 2rem;
-  transform: translateX(100px);
-  opacity: 0.5;
-}
 
 /* Footer */
 footer {
@@ -351,10 +300,6 @@ footer {
   transition: color 0.3s ease;
 }
 
-.social-icons a:hover {
-  color: #1db954; /* Verde neon estilo Spotify */
-}
-
 footer img {
   max-width: 100%;
   height: auto;
@@ -366,18 +311,14 @@ footer img {
   margin-top: 20px;
 }
 
-/* ===========================
-   Responsividade geral
-=========================== */
+/* Responsividade geral*/
 @media (max-width: 768px) {
-  /* Container vira coluna */
   .container {
     flex-direction: column;
     align-items: center;
     padding: 1rem;
   }
 
-  /* Esquerdo responsivo */
   .esquerdo {
     max-width: 100%;
     align-items: center;
@@ -392,7 +333,6 @@ footer img {
     font-size: 1.3rem;
   }
 
-  /* Direito responsivo */
   .direito h2 {
     font-size: 1.5rem;
     text-align: center;
@@ -403,15 +343,6 @@ footer img {
     text-align: center;
   }
 
-  /* Imagens menores */
-  .capa,
-  .musica {
-    width: 200px;
-    height: 200px;
-    margin: auto;
-  }
-
-  /* Outros ajustes para menus */
   .menu-barra {
     flex-direction: column;
     gap: 1rem;
@@ -427,7 +358,6 @@ footer img {
   }
 }
 
-/* Ajuste do carrossel para telas grandes */
 @media (min-width: 992px) {
   .carousel-container {
       max-width: 1250px;

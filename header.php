@@ -18,32 +18,30 @@
 
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <!-- Logo e nome -->
     <a class="navbar-brand" href="index.php">
       <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-koji.png" style="max-width: 70px; height: auto;" alt="logo">
       <span>KojimaMusics</span>
     </a>
 
-    <!-- Botão de toggle para mobile -->
     <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
       aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Links da navbar -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.php">Início</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="playlists.php">Playlists</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sobre.php">Sobre</a>
-        </li>
-      </ul>
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link <?php if (is_front_page()) echo 'active'; ?>" href="<?php echo home_url('/'); ?>">Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if ($_SERVER['REQUEST_URI'] === '/playlists') echo 'active'; ?>" href="<?php echo home_url('/playlists'); ?>">Playlists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if ($_SERVER['REQUEST_URI'] === '/sobre') echo 'active'; ?>" href="<?php echo home_url('/sobre'); ?>">Sobre</a>
+          </li>
+        </ul>
+
     </div>
   </div>
 </nav>

@@ -3,14 +3,13 @@
 <footer>
   <div class="container">
     <div class="row">
-      <!-- Coluna 1: Logo + Descrição + Redes Sociais -->
       <div class="col-lg-3 col-sm-6">
         <div class="single-box">
           <a href="index.html">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-koji.png" style="max-width: 40px; height: auto;" alt="EcoAventureiros">
           </a>
           <p>Projeto criado por Kojima. Juntos, por experiências que vão além da realidade!</p>
-          <!-- Ícones de Redes Sociais -->
+
           <div class="social-icons">
             <a href="#" target="_blank" class="text-white mx-2">
               <i class="bi bi-facebook" style="font-size: 1.5rem;"></i>
@@ -25,7 +24,6 @@
         </div>
       </div>
 
-      <!-- Coluna 2: Mapa do Site -->
       <div class="col-lg-3 col-sm-6">
         <div class="single-box">
           <h5>Mapa do Site</h5>
@@ -38,7 +36,6 @@
         </div>
       </div>
 
-      <!-- Coluna 3: Conteúdo ou Destaques -->
       <div class="col-lg-3 col-sm-6">
         <div class="single-box">
           <h5>Destaques</h5>
@@ -50,7 +47,6 @@
         </div>
       </div>
 
-      <!-- Coluna 4: Imagem ou Ilustração -->
       <div class="col-lg-3 col-sm-6">
         <div class="single-box text-center">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-koji.png" class="d-block w-100" alt="EcoAventureiros">
@@ -59,7 +55,6 @@
       </div>
     </div>
 
-    <!-- Rodapé inferior -->
     <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
       <p id="copyright" class="w-100 text-center">
         &copy; <?php echo date("Y"); ?> Kojimamusics. Todos os direitos reservados.
