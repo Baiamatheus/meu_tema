@@ -1,13 +1,10 @@
 <?php
-// Carregar estilos e scripts
+
 function meu_tema_scripts() {
-    // CSS principal do tema
     wp_enqueue_style('meu-tema-style', get_stylesheet_uri());
 
-    // CSS customizado
     wp_enqueue_style('meu-css-custom', get_template_directory_uri() . '/assets/css/main.css');
 
-    // Typed.js (efeito de digitação)
     wp_enqueue_script(
         'typed-js',
         'https://cdn.jsdelivr.net/npm/typed.js@2.0.12',
@@ -16,7 +13,6 @@ function meu_tema_scripts() {
         true
     );
 
-    // Script de inicialização do Typed.js
     wp_enqueue_script(
         'typed-init',
         get_template_directory_uri() . '/scripts/typed-init.js',
