@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title><?php bloginfo('name'); ?> <?php wp_title('|', true, 'left'); ?></title>
+  <title><?php wp_title('|', true, 'right'); ?><?php bloginfo('name'); ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap 5.3.3 CSS -->
@@ -14,11 +14,11 @@
 
   <?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class(); ?>>
 
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">
+    <a class="navbar-brand" href="<?php echo esc_url(home_url('/')); ?>">
       <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-koji.png" style="max-width: 70px; height: auto;" alt="logo">
       <span>KojimaMusics</span>
     </a>
@@ -32,13 +32,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <a class="nav-link <?php if (is_front_page()) echo 'active'; ?>" href="/">Início</a>
+          <a class="nav-link <?php if (is_front_page()) echo 'active'; ?>" href="<?php echo esc_url(home_url('/')); ?>">Início</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php if (is_page('playlists')) echo 'active'; ?>" href="/playlists">Playlists</a>
+          <a class="nav-link <?php if (is_page('playlists')) echo 'active'; ?>" href="<?php echo esc_url(home_url('/playlists')); ?>">Playlists</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php if (is_page('sobre')) echo 'active'; ?>" href="/sobre">Sobre</a>
+          <a class="nav-link <?php if (is_page('sobre')) echo 'active'; ?>" href="<?php echo esc_url(home_url('/sobre')); ?>">Sobre</a>
         </li>
       </ul>
     </div>

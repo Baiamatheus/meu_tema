@@ -1,7 +1,8 @@
-<?php 
+<?php
 /*
 Template Name: Sobre
 */
+
 get_header(); ?>
 
 <div class="container">

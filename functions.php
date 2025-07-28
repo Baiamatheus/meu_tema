@@ -1,56 +1,53 @@
 <?php
 
+// Enfileirar CSS e JS do tema
 function meu_tema_scripts() {
     wp_enqueue_style('meu-tema-style', get_stylesheet_uri());
-
     wp_enqueue_style('meu-css-custom', get_template_directory_uri() . '/assets/css/main.css');
 
-    wp_enqueue_script(
-        'typed-js',
-        'https://cdn.jsdelivr.net/npm/typed.js@2.0.12',
-        array(),
-        null,
-        true
-    );
-
-    wp_enqueue_script(
-        'typed-init',
-        get_template_directory_uri() . '/scripts/typed-init.js',
-        array('typed-js'),
-        null,
-        true
-    );
+    wp_enqueue_script('typed-js', 'https://cdn.jsdelivr.net/npm/typed.js@2.0.12', array(), null, true);
+    wp_enqueue_script('typed-init', get_template_directory_uri() . '/scripts/typed-init.js', array('typed-js'), null, true);
 }
 add_action('wp_enqueue_scripts', 'meu_tema_scripts');
 
-// Adicionar rotas personalizadas para páginas sem precisar criar posts ou páginas no WP
-function adicionar_rotas_personalizadas() {
-    add_rewrite_rule('^playlists/?$', 'index.php?custom_page=playlists', 'top');
-    add_rewrite_rule('^sobre/?$', 'index.php?custom_page=sobre', 'top');
-    add_rewrite_rule('^gerador/?$', 'index.php?custom_page=gerador', 'top');
-}
-add_action('init', 'adicionar_rotas_personalizadas');
+// Criar páginas personalizadas com seus respectivos templates
+function criar_paginas_personalizadas() {
+    $paginas = [
+        [
+            'post_title'    => 'Gerador',
+            'post_name'     => 'gerador',
+            'post_template' => 'gerador.php',
+        ],
+        [
+            'post_title'    => 'Playlists',
+            'post_name'     => 'playlists',
+            'post_template' => 'playlists.php',
+        ],
+        [
+            'post_title'    => 'Sobre',
+            'post_name'     => 'sobre',
+            'post_template' => 'sobre.php',
+        ],
+    ];
 
-// Permitir que a query var 'custom_page' seja reconhecida pelo WP
-function adicionar_query_vars($vars) {
-    $vars[] = 'custom_page';
-    return $vars;
-}
-add_filter('query_vars', 'adicionar_query_vars');
+    foreach ($paginas as $pagina) {
+        $page = get_page_by_path($pagina['post_name']);
 
-// Carregar o template certo de acordo com a URL
-function carregar_template_personalizado() {
-    $pagina = get_query_var('custom_page');
+        // Se não existe, cria
+        if (!$page) {
+            $id = wp_insert_post([
+                'post_title'   => $pagina['post_title'],
+                'post_name'    => $pagina['post_name'],
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+            ]);
 
-    if ($pagina === 'playlists') {
-        include get_template_directory() . '/playlists.php';
-        exit;
-    } elseif ($pagina === 'sobre') {
-        include get_template_directory() . '/sobre.php';
-        exit;
-    } elseif ($pagina === 'gerador') {
-        include get_template_directory() . '/gerador.php';
-        exit;
+            if ($id && !is_wp_error($id)) {
+                update_post_meta($id, '_wp_page_template', $pagina['post_template']);
+            }
+        } else {
+            update_post_meta($page->ID, '_wp_page_template', $pagina['post_template']);
+        }
     }
 }
-add_action('template_redirect', 'carregar_template_personalizado');
+add_action('after_switch_theme', 'criar_paginas_personalizadas');

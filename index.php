@@ -15,7 +15,7 @@ get_header();
     <div class="direito">
         <h2>FIQUE POR DENTRO</h2>
         <p>Que tal montar novas playlists?</p>
-        <a href="gerador.php" class="btn">Gerar nova playlist</a>
+        <a href="<?php echo get_permalink(get_page_by_path('gerador')); ?>" class="btn">Gerar nova playlist</a>
     </div>
 </div>
 
