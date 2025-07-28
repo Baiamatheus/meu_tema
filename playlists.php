@@ -37,6 +37,8 @@ get_header();
 </div>
 
 <style>
+    /*Style temporário aqui pois não está pegando
+  do main.css */
   body {
     background: linear-gradient(90deg, #000428, #004e92);
     color: #fff;

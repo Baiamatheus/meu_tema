@@ -122,6 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar_playlist'])) {
 </div>
 
 <style>
+  /*Style temporário aqui pois não está pegando
+  do main.css */
   body {
   background: linear-gradient(90deg, #000428, #004e92);
   color: #fff;
@@ -130,9 +132,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar_playlist'])) {
 }
 
 .container {
-  padding: 3rem 2rem;
-  max-width: 900px;
-  margin: 100px auto 100px auto; 
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem auto;
+  padding: 3rem;  
+  width: 90%;
+  max-width: 1200px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  gap: 2rem;
 }
 
 .esquerdo, .direito {
@@ -202,13 +214,23 @@ input[type="number"], select {
 .modal-content {
   background-color: #222;
   color: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 600px;
+  margin: 5% auto;
+  padding: 40px;
+  width: 80%;
+  max-width: 1000px;
+  height: auto;
+  max-height: 80vh;
   border-radius: 10px;
   position: relative;
   border: 2px solid #444;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%;  
+    max-width: 800px;  
+  }
 }
 
 .modal-content h2, .modal-content h3 {
@@ -237,7 +259,6 @@ input[type="number"], select {
 .modal-content .close:hover {
   color: #fff;
 }
-
 </style>
 
 <script>
