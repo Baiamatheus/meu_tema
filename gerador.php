@@ -6,6 +6,7 @@ Template Name: Gerador
 session_start();
 get_header();
 
+
 // Processa o POST de salvar playlist
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar_playlist'])) {
   $nova_playlist = [
@@ -21,9 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar_playlist'])) {
   }
 
   $_SESSION['playlists'][] = $nova_playlist;
-
-  wp_redirect(home_url('/playlists'));
-  exit;
 }
 ?>
 
@@ -34,18 +32,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar_playlist'])) {
   $humor = htmlspecialchars($_GET['humor']);
 
   $nomes_possiveis = [
-    'pop' => ['animado' => 'Hits para Brilhar', 'relaxante' => 'Pop Suave', 'treino' => 'Pop em Movimento', 'festa' => 'Festa Pop Total'],
-    'rock' => ['animado' => 'Rock na Veia', 'relaxante' => 'Rock Desplugado', 'treino' => 'Força e Guitarra', 'festa' => 'Noite do Rock'],
-    'eletronica' => ['animado' => 'Batida Elevada', 'relaxante' => 'Ambiente Digital', 'treino' => 'Pump Eletrônico', 'festa' => 'Festa Neon'],
-    'indie' => ['animado' => 'Indie Vibes', 'relaxante' => 'Chá Indie', 'treino' => 'Corrida Alternativa', 'festa' => 'Dance Alternativo']
+    'pop' => ['animado' => 'Hits para Brilhar', 'relaxante' => 'Pop Suave'],
+    'rock' => ['animado' => 'Rock na Veia', 'relaxante' => 'Rock Desplugado'],
   ];
+
   $nome_playlist = $nomes_possiveis[$genero][$humor] ?? 'Minha Playlist';
+  global $wpdb;
+  $tabela = $wpdb->prefix . 'musicas';
 
-  // Aqui você deve definir ou importar o array $musicas_reais separadamente
-  $musicas_disponiveis = $musicas_reais[$genero][$humor] ?? [['nome' => 'Sem Música', 'artista' => '-', 'duracao' => 3]];
+  $playlist_musicas = $wpdb->get_results(
+    $wpdb->prepare("SELECT nome, artista, duracao FROM $tabela WHERE genero = %s AND humor = %s", $genero, $humor),
+    ARRAY_A
+  );
 
-  
-  $playlist_musicas = $musicas_disponiveis;
+  if (empty($playlist_musicas)) {
+    $playlist_musicas = [['nome' => 'Sem Música', 'artista' => '-', 'duracao' => 3]];
+  }
+
   $tempo_total = array_sum(array_column($playlist_musicas, 'duracao'));
 ?>
 
@@ -71,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar_playlist'])) {
       </ul>
 
       <div style="margin-top: 20px;">
-        <form method="post" action="">
+        <form method="post" action="<?php echo esc_url(get_permalink()); ?>">
           <input type="hidden" name="salvar_playlist" value="1">
           <input type="hidden" name="nome" value="<?php echo $nome_playlist; ?>">
           <input type="hidden" name="genero" value="<?php echo $genero; ?>">
@@ -100,8 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar_playlist'])) {
           <option value="">Selecione</option>
           <option value="pop">Pop</option>
           <option value="rock">Rock</option>
-          <option value="eletronica">Eletrônica</option>
-          <option value="indie">Indie</option>
         </select>
       </div>
 
@@ -122,152 +123,154 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar_playlist'])) {
 </div>
 
 <style>
-  /*Style temporário aqui pois não está pegando
-  do main.css */
+/*Style temporário aqui pois não está pegando
+do main.css */
   body {
-  background: linear-gradient(90deg, #000428, #004e92);
-  color: #fff;
-  margin: 0;
-  padding: 0;
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  margin: 4rem auto;
-  padding: 3rem;  
-  width: 90%;
-  max-width: 1200px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  color: #fff;
-  gap: 2rem;
-}
-
-.esquerdo, .direito {
-  background-color: rgba(51, 51, 51, 0.9);
-  padding: 2rem;
-  border-radius: 10px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-label, select, input {
-  display: block;
-  width: 100%;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-input[type="number"], select {
-  background-color: #222;
-  border: 1px solid #555;
-  padding: 0.5rem;
-  color: #fff;
-}
-
-.btn {
-  display: inline-block;
-  background-color: #006eff;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn:hover {
-  background-color: #0055cc;
-}
-
-.playlist-card {
-  background-color: rgba(34, 34, 34, 0.9);
-  border: 2px solid #555;
-  padding: 16px;
-  margin: 20px 0;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: background 0.3s, transform 0.2s;
-}
-
-.playlist-card:hover {
-  background-color: #1e1e1e;
-  transform: scale(1.02);
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.8);
-}
-
-.modal-content {
-  background-color: #222;
-  color: #fff;
-  margin: 5% auto;
-  padding: 40px;
-  width: 80%;
-  max-width: 1000px;
-  height: auto;
-  max-height: 80vh;
-  border-radius: 10px;
-  position: relative;
-  border: 2px solid #444;
-  box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .modal-content {
-    width: 90%;  
-    max-width: 800px;  
+    background: linear-gradient(90deg, #000428, #004e92);
+    color: #fff;
+    margin: 0;
+    padding: 0;
   }
-}
 
-.modal-content h2, .modal-content h3 {
-  color: #00aaff;
-}
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem auto;
+    padding: 3rem;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    gap: 2rem;
+  }
 
-.modal-content ul {
-  list-style: none;
-  padding-left: 0;
-}
+  .esquerdo, .direito {
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
 
-.modal-content li {
-  border-bottom: 1px solid #444;
-  padding: 6px 0;
-}
+  label, select, input {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
 
-.modal-content .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 22px;
-  cursor: pointer;
-  color: #aaa;
-}
+  input[type="number"], select {
+    background-color: #222;
+    border: 1px solid #555;
+    padding: 0.5rem;
+    color: #fff;
+  }
 
-.modal-content .close:hover {
-  color: #fff;
-}
+  .btn {
+    display: inline-block;
+    background-color: #006eff;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #0055cc;
+  }
+
+  .playlist-card {
+    background-color: rgba(34, 34, 34, 0.9);
+    border: 2px solid #555;
+    padding: 16px;
+    margin: 20px 0;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .playlist-card:hover {
+    background-color: #1e1e1e;
+    transform: scale(1.02);
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  .modal-content {
+    background-color: #222;
+    color: #fff;
+    margin: 5% auto;
+    padding: 40px;
+    width: 80%;
+    max-width: 1000px;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 10px;
+    position: relative;
+    border: 2px solid #444;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 768px) {
+    .modal-content {
+      width: 90%;
+      max-width: 800px;
+    }
+  }
+
+  .modal-content h2, .modal-content h3 {
+    color: #00aaff;
+  }
+
+  .modal-content ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .modal-content li {
+    border-bottom: 1px solid #444;
+    padding: 6px 0;
+  }
+
+  .modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #aaa;
+  }
+
+  .modal-content .close:hover {
+    color: #fff;
+  }
 </style>
 
 <script>
   function abrirModal() {
     document.getElementById("modalPlaylist").style.display = "block";
   }
+
   function fecharModal() {
     document.getElementById("modalPlaylist").style.display = "none";
   }
+
   window.onclick = function(event) {
     const modal = document.getElementById("modalPlaylist");
     if (event.target == modal) modal.style.display = "none";
