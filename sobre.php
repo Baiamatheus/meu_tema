@@ -1,18 +1,10 @@
-<?php 
+<?php
 /*
 Template Name: Sobre
 */
+
 get_header(); ?>
 
-<div class="header-top">
-  <div class="menu-icon"></div>
-  <nav class="menu-barra">
-    <a href="index.php">Início</a>
-    <a href="playlists.php">Playlists</a>
-    <a href="sobre.php">Sobre</a>
-  </nav>
-  <div class="right-icon"></div>
-</div>
 <div class="container">
   <div class="esquerdo">
     <h1>Sobre Nós</h1>
